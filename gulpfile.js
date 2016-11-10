@@ -53,7 +53,6 @@ gulp.task('static', function() {
 });
 
 // Compile LESS files from /less into /css
-//DO I NEED TO FIX THE DEST?
 gulp.task('less', function() {
     return gulp.src('src/less/creative.less')
         .pipe(less())
@@ -88,7 +87,6 @@ gulp.task('minify-js', function() {
 });
 
 // Copy vendor libraries from /node_modules into /vendor
-//DO THESE NEED TO BE IN DIST?
 gulp.task('copy', function() {
     gulp.src(['src/node_modules/bootstrap/dist/**/*', '!src/**/npm.js', '!src/**/bootstrap-theme.*', '!src/**/*.map'])
         .pipe(gulp.dest('dist/vendor/bootstrap'))
@@ -113,35 +111,24 @@ gulp.task('copy', function() {
         .pipe(gulp.dest('src/dist/vendor/font-awesome'))
 })
 
+gulp.task('default', ['pages', 'static', 'images', 'less', 'minify-css', 'minify-js', 'copy' ]);
+
 // Configure the browserSync task
-gulp.task('sync', function() {
+gulp.task('browserSync', function() {
     browserSync.init({
         server: {
             baseDir: 'dist'
-        }
+        },
     })
 })
-// Run everything
-gulp.task('default', ['pages', 'static', 'images', 'less', 'minify-css', 'minify-js', 'copy' ]);
-
-gulp.task('sync', function(cb) {
-  return plugins.sequence('sync', cb);
-});
-
-gulp.task('deploy', function() {
-  return gulp.src('./dist/**/*')
-             .pipe(plugins.ghPages({}));
-});
 
 // Dev task with browserSync
-gulp.task('dev', ['sync', 'less', 'minify-css', 'minify-js'], function() {
-    gulp.watch('src/less/*.less',   ['less']);
-    gulp.watch('src/css/*.css',     ['minify-css']);
+gulp.task('dev', ['browserSync', 'less', 'minify-css', 'minify-js'], function() {
+    gulp.watch('src/less/*.less', ['less']);
+    gulp.watch('src/css/*.css', ['minify-css']);
     gulp.watch('src/img/**/*',  [ 'images']);
-    gulp.watch('src/js/*.js',       ['minify-js']);
+    gulp.watch('src/js/*.js', ['minify-js']);
     // Reloads the browser whenever HTML or JS files change
     gulp.watch('*.html', browserSync.reload);
     gulp.watch('js/**/*.js', browserSync.reload);
 });
-
-gulp.task('sync');
