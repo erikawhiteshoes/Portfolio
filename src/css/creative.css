@@ -9,7 +9,8 @@ body {
   width: 100%;
 }
 body {
-  font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+  /*font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;*/
+  font-family: 'Raleway', sans-serif;
 }
 hr {
   border-color: #5B85AA;
@@ -203,7 +204,7 @@ header .header-content .header-content-inner p {
     font-size: 50px;
   }
   header .header-content .header-content-inner p {
-    font-size: 18px;
+    font-size: 25px;
     max-width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -229,6 +230,8 @@ header .header-content .header-content-inner p {
   display: block;
   max-width: 650px;
   margin: 0 auto;
+  border-bottom-style: solid;
+  border-bottom-color: #3DD6D0;
 }
 .portfolio-box .portfolio-box-caption {
   color: white;
