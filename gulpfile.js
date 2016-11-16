@@ -116,6 +116,17 @@ gulp.task('minify-js', function() {
 //         .pipe(gulp.dest('dist/vendor/font-awesome'))
 // })
 
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+             .pipe(plugins.file('.nojekyll', ''))
+             .pipe(plugins.ghPages({
+                newRoot: 'erikawhiteshoes.github.io',
+                remoteUrl: 'git@github.com:erikawhiteshoes/erikawhiteshoes.github.io.git',
+                origin: 'origin', // origin for the site gh-pages repo, not this repo
+                branch: 'master'
+             }));
+});
+
 gulp.task('default', ['pages', 'static', 'vendor', 'images', 'less', 'minify-css', 'minify-js']);
 
 // Configure the browserSync task
