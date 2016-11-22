@@ -418,3 +418,12 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #222222;
 }
+
+.sr-icons {
+  transform-origin: center;
+  transition: color .8s;
+}
+.sr-icons:hover {
+  transform: scale(1.2)!important;
+  color: #3DD6D0;
+}
